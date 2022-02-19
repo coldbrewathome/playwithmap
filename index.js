@@ -1,66 +1,32 @@
-/*
- * declare map as a global variable
- */
-var map;
+let map;
 
-/*
- * use google maps api built-in mechanism to attach dom events
- */
-google.maps.event.addDomListener(window, "load", function () {
-
-  /*
-   * create map
-   */
-  var map = new google.maps.Map(document.getElementById("map"), {
-    center: new google.maps.LatLng(47.791846, 22.876955),
-    zoom: 17,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 2,
+    center: new google.maps.LatLng(2.8, -187.3),
+    mapTypeId: "terrain",
   });
 
-  /*
-   * create infowindow (which will be used by markers)
-   */
-  var infoWindow = new google.maps.InfoWindow();
+  // Create a <script> tag and set the USGS URL as the source.
+  const script = document.createElement("script");
 
-  /*
-   * marker creater function (acts as a closure for html parameter)
-   */
-  function createMarker(options, html) {
-    var marker = new google.maps.Marker(options);
-    if (html) {
-      google.maps.event.addListener(marker, "click", function () {
-        infoWindow.setContent(html);
-        infoWindow.open(options.map, this);
-      });
-    }
-    return marker;
+  // This example uses a local copy of the GeoJSON stored at
+  // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+  script.src =
+    "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
+  document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+// Loop through the results array and place a marker for each
+// set of coordinates.
+const eqfeed_callback = function (results) {
+  for (let i = 0; i < results.features.length; i++) {
+    const coords = results.features[i].geometry.coordinates;
+    const latLng = new google.maps.LatLng(coords[1], coords[0]);
+
+    new google.maps.Marker({
+      position: latLng,
+      map: map,
+    });
   }
-
-  /*
-   * add markers to map
-   */
-  var marker0 = createMarker({
-    position: new google.maps.LatLng(47.791846, 22.876955),
-    map: map,
-    icon: "http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png"
-  }, "<p>BOITOR ORSOLYA, CABINET MEDICAL INDIVIDUAL</p>");
-
-});
-
-
-
-// Initialize and add the map
-// function initMap() {
-//   // The location of Uluru
-//   const uluru = { lat: -25.344, lng: 131.036 };
-//   // The map, centered at Uluru
-//   const map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 4,
-//     center: uluru,
-//   });
-//   // The marker, positioned at Uluru
-//   const marker = new google.maps.Marker({
-//     position: uluru,
-//     map: map,
-//   });
-// }
+};
