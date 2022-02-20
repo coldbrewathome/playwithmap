@@ -23,7 +23,7 @@ const eqfeed_callback = function (results) {
   for (let i = 0; i < results.data.length; i++) {
     const coords = results.data[i].position;
     console.log(coords);
-    const latLng = new google.maps.LatLng(coords[1], coords[0]);
+    const latLng = new google.maps.LatLng(coords[0], coords[1]);
 
     new google.maps.Marker({
       position: latLng,
