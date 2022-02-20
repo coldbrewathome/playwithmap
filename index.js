@@ -19,6 +19,7 @@ function initMap() {
 
   function createMarker(options, html) {
     var marker = new google.maps.Marker(options);
+    const infowindow = new google.maps.InfoWindow({ });
     if (html) {
       google.maps.event.addListener(marker, "click", function() {
         infoWindow.setContent(html);
