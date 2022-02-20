@@ -17,17 +17,29 @@ function initMap() {
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 
+  function createMarker(options, html) {
+    var marker = new google.maps.Marker(options);
+    if (html) {
+      google.maps.event.addListener(marker, "click", function() {
+        infoWindow.setContent(html);
+        infoWindow.open(options.map, this);
+      });
+    }
+    return marker;
+  }
+
+
 // Loop through the results array and place a marker for each
 // set of coordinates.
 const eqfeed_callback = function (results) {
   for (let i = 0; i < results.data.length; i++) {
     const coords = results.data[i].position;
-    console.log(coords);
     const latLng = new google.maps.LatLng(coords[0], coords[1]);
 
-    new google.maps.Marker({
+    createMarker({
       position: latLng,
       map: map,
-    });
+      icon: "https://www.flaticon.com/free-icon/favorite-heart-button_60993"
+    }, "<p>SOME COMPANY</p>");
   }
 };
