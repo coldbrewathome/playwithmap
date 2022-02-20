@@ -26,7 +26,7 @@ const eqfeed_callback = function (results) {
     const latLng = new google.maps.LatLng(coords[1], coords[0]);
 
     new google.maps.Marker({
-      position: coords,
+      position: latLng,
       map: map,
     });
   }
