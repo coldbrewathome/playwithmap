@@ -39,7 +39,7 @@ const eqfeed_callback = function (results) {
     createMarker({
       position: latLng,
       map: map,
-      icon: "https://www.flaticon.com/free-icon/favorite-heart-button_60993"
+      icon: "/playwithmap/images/g.png"
     }, "<p>SOME COMPANY</p>");
   }
 };
