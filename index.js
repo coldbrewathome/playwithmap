@@ -2,9 +2,9 @@ let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 2,
+    zoom: 17,
     center: new google.maps.LatLng(37.42292240075573, -122.08429209566403),
-    mapTypeId: "terrain",
+    mapTypeId: "roadmap",
   });
 
   // Create a <script> tag and set the USGS URL as the source.
