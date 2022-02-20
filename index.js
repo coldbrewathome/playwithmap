@@ -35,7 +35,7 @@ const eqfeed_callback = function (results) {
     const coords = results.data[i].position;
     const latLng = new google.maps.LatLng(coords[0], coords[1]);
     const image = {
-      url: "/playwithmap/images/g.png",
+      url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
       // This marker is 20 pixels wide by 32 pixels high.
       size: new google.maps.Size(20, 32),
       // The origin for this image is (0, 0).
