@@ -17,16 +17,6 @@ function initMap() {
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-const image = {
-    url: "/playwithmap/images/g.png",
-    // This marker is 20 pixels wide by 32 pixels high.
-    size: new google.maps.Size(20, 32),
-    // The origin for this image is (0, 0).
-    origin: new google.maps.Point(0, 0),
-    // The anchor for this image is the base of the flagpole at (0, 32).
-    anchor: new google.maps.Point(0, 32),
-  };
-
   function createMarker(options, html) {
     var marker = new google.maps.Marker(options);
     if (html) {
@@ -38,6 +28,18 @@ const image = {
     return marker;
   }
 
+function createImage() {
+  const image = {
+    url: "/playwithmap/images/g.png",
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 32),
+  };
+  return image;
+}
 
 // Loop through the results array and place a marker for each
 // set of coordinates.
@@ -49,7 +51,7 @@ const eqfeed_callback = function (results) {
     createMarker({
       position: latLng,
       map: map,
-      icon: image,
+      icon: createImage(),
       title: "some title",
     }, "<p>SOME COMPANY</p>");
   }
